@@ -1,0 +1,47 @@
+orekit-data
+===========
+
+This repository is a copy of the Orekit data repository
+(https://gitlab.orekit.org/orekit/orekit-data), which is maintained by
+CS GROUP and distributed under the Apache License, Version 2.0.
+
+The Apache License, Version 2.0 (see the LICENSE file) applies to the files
+authored for this repository, i.e. the README, the update script and the
+GitHub Actions workflows. It does NOT relicense the data files: those are
+produced by third parties and remain subject to their own terms and
+conditions. Users are responsible for complying with them.
+
+Data sources
+------------
+
+  JPL DE 440 ephemerides
+      NASA / Jet Propulsion Laboratory
+      https://ssd.jpl.nasa.gov/planets/eph_export.html
+
+  IERS Earth orientation parameters
+  (finals.all, finals2000A.all, itrf-versions.conf)
+      International Earth Rotation and Reference Systems Service
+      https://www.iers.org/  https://datacenter.iers.org/
+
+  Leap seconds (tai-utc.dat)
+      U.S. Naval Observatory
+      https://maia.usno.navy.mil/
+
+  Marshall Solar Activity Future Estimation (MSAFE)
+      NASA Marshall Space Flight Center
+      https://www.nasa.gov/
+
+  CSSI space weather data
+      AGI / CelesTrak
+      https://ftp.agi.com/pub/DynamicEarthData/
+
+  Space environment data (JB2008 indices)
+      https://sol.spacenvironment.net/JB2008/
+
+  Eigen-6S gravity field
+      GFZ German Research Centre for Geosciences / IGG
+      https://icgem.gfz-potsdam.de/
+
+  FES 2004 ocean tides
+      LEGOS / CLS (now NOVELTIS)
+      https://os.copernicus.eu/
