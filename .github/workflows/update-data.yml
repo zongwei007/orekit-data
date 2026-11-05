@@ -1,0 +1,84 @@
+name: Update data
+
+on:
+  schedule:
+    # Sources below are updated every day (AGI ~15:40 UTC, JB2008 ~17:51 UTC),
+    # so run after both of them. GitHub may delay scheduled runs by tens of
+    # minutes; that is fine for daily data.
+    - cron: "43 20 * * *"    # daily
+    # Earth orientation parameters and MSAFE change rarely, and MSAFE has no
+    # fixed publication day, so probe once a week.
+    - cron: "17 3 * * 1"     # weekly (Monday)
+  workflow_dispatch:
+    inputs:
+      tier:
+        description: Which tier to update
+        type: choice
+        default: all
+        options: [all, daily, weekly]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Resolve tier
+        id: tier
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            tier='${{ inputs.tier }}'
+          elif [ "${{ github.event.schedule }}" = "43 20 * * *" ]; then
+            tier=daily
+          else
+            tier=weekly
+          fi
+          echo "value=$tier" >> "$GITHUB_OUTPUT"
+          echo "tier: $tier"
+
+      - name: Run update
+        run: |
+          set -o pipefail
+          bash .github/scripts/update-tier.sh "${{ steps.tier.outputs.value }}" \
+            2>&1 | tee "$RUNNER_TEMP/update.log"
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### tier: ${{ steps.tier.outputs.value }}"
+            echo '```'
+            grep -E '^(OK|FAILED|SKIP) ' "$RUNNER_TEMP/update.log" 2>/dev/null || echo "(no per-source status)"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if grep -q '^FAILED ' "$RUNNER_TEMP/update.log" 2>/dev/null; then
+            echo "::warning::Some data sources failed, see the job summary"
+          fi
+
+      - name: Commit and push
+        run: |
+          find . -name '*.old' -delete
+          case "${{ steps.tier.outputs.value }}" in
+            daily)  paths="CSSI-Space-Weather-Data Space-Environment-Data" ;;
+            weekly) paths="Earth-Orientation-Parameters MSAFE" ;;
+            all)    paths="." ;;
+          esac
+          git add -A -- $paths
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git diff --cached --stat
+          git commit -m "data(${{ steps.tier.outputs.value }}): update $(date -u +%F)" \
+                     -m "$(git diff --cached --stat | tail -1)"
+          git push
