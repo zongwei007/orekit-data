@@ -43,22 +43,12 @@ team uses to update the repository.
 There is *NO* guarantee that this convenience archive will be updated
 or even provided in the future.
 
-## Notes for Orekit Python users
+## License
 
-You can download this orekit data repository via pip (don't forget to activate your
-conda environment containing orekit beforehand):
+The files authored for this repository (README, `update.sh`, GitHub workflows)
+are distributed under the [Apache License, Version 2.0](LICENSE).
 
-```bash
-pip install git+https://gitlab.orekit.org/orekit/orekit-data.git
-```
-
-This will install a Python library named `orekitdata`. The Python library receives a new
-version tag at every commit in this repository so that your Python project can pull the
-newest version of the orekit data every time this repository is updated. The 7 last
-characters of the version tag correspond to the 7 first characters of the git hash of the
-commit: for instance the Python version `orekitdata-0+untagged.70.g91b2c79` correspond to
-the commit of the `main` branch of this repository with a githash starting with `91b2c79`.
-
-Then to pass the data folder to Orekit in Python, follow the instructions in the
-[Python wrapper Wiki](https://gitlab.orekit.org/orekit-labs/python-wrapper/-/wikis/installation#physical-data).
+The data files themselves are produced by third parties (IERS, USNO, NASA/JPL,
+AGI/CelesTrak, GFZ, LEGOS/CLS...) and remain subject to their own terms and
+conditions. See [NOTICE](NOTICE) for the list of data sources.
 

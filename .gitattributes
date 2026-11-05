@@ -1,2 +1,2 @@
-_version.py export-subst
-._version.py export-subst
+* text=auto eol=lf
+*.440 binary
