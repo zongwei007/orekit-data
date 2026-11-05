@@ -1,4 +1,5 @@
 [![Update data](https://github.com/zongwei007/orekit-data/actions/workflows/update-data.yml/badge.svg)](https://github.com/zongwei007/orekit-data/actions/workflows/update-data.yml)
+[![Data updated](https://img.shields.io/github/last-commit/zongwei007/orekit-data?label=data%20updated)](https://github.com/zongwei007/orekit-data/commits/main)
 
 > **Unofficial mirror.** This repository is an unofficial copy of the
 > [Orekit data repository](https://gitlab.orekit.org/orekit/orekit-data),
