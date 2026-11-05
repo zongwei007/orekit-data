@@ -5,6 +5,10 @@ This repository is a copy of the Orekit data repository
 (https://gitlab.orekit.org/orekit/orekit-data), which is maintained by
 CS GROUP and distributed under the Apache License, Version 2.0.
 
+It is an unofficial mirror: it is not affiliated with, nor endorsed by,
+the Orekit project or CS GROUP. The upstream repository remains the
+authoritative source for these files.
+
 The Apache License, Version 2.0 (see the LICENSE file) applies to the files
 authored for this repository, i.e. the README, the update script and the
 GitHub Actions workflows. It does NOT relicense the data files: those are

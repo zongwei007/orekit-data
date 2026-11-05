@@ -1,8 +1,15 @@
+> **Unofficial mirror.** This repository is an unofficial copy of the
+> [Orekit data repository](https://gitlab.orekit.org/orekit/orekit-data),
+> which is maintained by the Orekit team. It is not affiliated with, nor
+> endorsed by, the Orekit project. The upstream repository is the
+> authoritative source and the files here may lag behind it. See
+> [NOTICE](NOTICE) for the origin of each data set.
+
 This project contains some example data files useful that may be used
 as an initial setup for the [Orekit library](https://www.orekit.org/).
 
 In order to use these files, simply download the
-[latest archive](https://gitlab.orekit.org/orekit/orekit-data/-/archive/main/orekit-data-main.zip)
+[latest archive](https://github.com/zongwei007/orekit-data/archive/refs/heads/main.zip)
 and unzip it anywhere you want. Rename the `orekit-data-main` folder to
 `orekit-data`, note the path of this folder and add the following lines at
 the start of your program:
